@@ -4,7 +4,11 @@ this is just for fun do not use.
 
 Main idea is to target companies with high growth for purchase, currently looks at revenue growth, dps growth and a value score and boils those three into a number.  If an equity reaches the threshold it is bought, if it finds an equity that is rather not lacks growth it shorts it.  
 
-Still lacks- 
+Still lacks-
+
+NEED BETTER WEIGHTS, dynamic weights would help a lot - working on it
+
+
 Slippage 
 
 Portfolio optimization 
