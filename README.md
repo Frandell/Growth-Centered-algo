@@ -6,10 +6,16 @@ Main idea is to target companies with high growth for purchase, currently looks 
 
 Still lacks- 
 Slippage 
+
 Portfolio optimization 
+
 Stop lost, can have some pretty wild sings going from +30 to 18% needs a stop lost evaluate 
+
 Currently only one strategy if an equity reaches the alpha threshold it is added to the portfolio and bought, and if certain equates are not growing at all they are shorted. 
+
 Too much Leverage, some leverage is good yes but this later on behaves like a X2 leverage ETF more than anything else a stop lost function and portfolio optimization would help. 
+
+
 Does not take into account other indictors i.e. SMA, RSI, etc. but that is fine for the most part can be included but this is not meant to be high frequency trading 
 
 
