@@ -9,7 +9,7 @@ Slippage
 
 Portfolio optimization 
 
-Stop lost, can have some pretty wild sings going from +30 to 18% needs a stop lost evaluate 
+Stop lost, can have some pretty wild sings going from +30 to 18% needs a stop loses and reevaluate
 
 Currently only one strategy if an equity reaches the alpha threshold it is added to the portfolio and bought, and if certain equites are not growing at all they are shorted. 
 
