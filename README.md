@@ -2,6 +2,8 @@ For hobby/educational purposes not meant for live testing, I have no plans to us
 NOT High frequency trading, portfolio is rebalanced daily.
 
 Main idea is to target companies with high growth for purchase, currently looks at revenue growth, dps growth.  If an equity reaches a certain threshold it is bought, if it finds certain equities that are underperforming it opens up short positions against those companies. 
+
+
 TO DO
 
 binomial distribution of weights
