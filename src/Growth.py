@@ -35,25 +35,27 @@ def initialize(context):
 def make_pipeline():
     Alpha_factor = operation_ratios.revenue_growth.latest
     Alpha2 = earnings_ratios.dps_growth.latest
-    Alpha3 = asset_classification.value_score.latest
+    Alpha3 = asset_classification.growth_score.latest
+    Alpha4 = sentiment.sentiment_signal.latest
     base_universe = get_tradeable_stocks()
-    universe = (Q1500US() & 
+    universe = (Q1500US() &
                 Alpha_factor.notnull() &
                 Alpha2.notnull() &
-                Alpha3.notnull() 
+                Alpha3.notnull() &
+                Alpha4.notnull()
                & base_universe)
-    ##Rankin 
+    ##Rankin
     Alpha_factor =  Alpha_factor.rank(mask = universe, method = 'average')
     Alpha2 = Alpha2.rank(mask = universe, method = 'average')
     Alpha3 = Alpha3.rank(mask = universe, method = 'average')
-    Alpha_factor =  Alpha_factor+Alpha2+Alpha3
- 
+    Alpha_factor =  Alpha_factor+Alpha2+Alpha3+Alpha4
+
     pipe = Pipeline(columns ={'Alpha_factor': Alpha_factor,
-                               'longs': Alpha_factor > 1500,
+                               'longs': Alpha_factor > 800,
                                 'shorts': Alpha_factor < 500},
                     screen = universe)
     return pipe
-  
+
 
 
 def before_trading_start(context, data):
@@ -69,30 +71,32 @@ def rebalance(context, data):
     ##need dynamic weights
     long_secs = context.output[context.output['longs']].index
     short_secs = context.output[context.output['shorts']].index
-    print("For the log" , len(long_secs), len(short_secs)) 
+    print("For the log" , len(long_secs), len(short_secs))
     for secuirty in long_secs:
         if data.can_trade(secuirty):
-           order_target_percent(secuirty, 0.005)
+            if len(long_secs) != 0:
+               order_target_percent(secuirty, 1.3/len(long_secs))
     for secuirty in short_secs:
         if data.can_trade(secuirty):
-            order_target_percent(secuirty, -0.0035)
+            if len(short_secs) != 0:
+                order_target_percent(secuirty, -0.1/len(short_secs))
     for secuirty in context.portfolio.positions:
         if data.can_trade(secuirty) and secuirty not in long_secs and secuirty not in short_secs:
             order_target_percent(secuirty, 0)
 
 
 def record_vars(context, data):
-    ##need better records - Custom 
+    ##need better records - Custom
     long_count = 0
     short_count = 0
     for position in context.portfolio.positions.itervalues():
         if position.amount > 0:
             long_count += 1
         if position.amount < 0:
-            short_count += 1         
+            short_count += 1
     # Plot the counts
     record(num_long=long_count, num_short=short_count, leverage=context.account.leverage)
-    
+
 """
 Base universe cloned from
 https://www.quantopian.com/posts/base-universe-and-masking
@@ -138,5 +142,5 @@ def get_tradeable_stocks():
         & not_lp_balance_sheet
         & have_market_cap
     )
-    
+
     return tradeable_stocks
