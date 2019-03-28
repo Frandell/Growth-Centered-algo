@@ -26,7 +26,11 @@ Does not take into account other indictors i.e. SMA, RSI, etc. but that is fine 
 
 
 
-BackTest 2010 - 2016 * Algo does not work before 2010 due to lack of certain datasets 
+BackTest 2010 - 2016 * Algo does not work before 2010 due to lack of certain datasets
+
+
+
+
 ![](images/BaseBackTest.PNG)
 
 
@@ -37,7 +41,11 @@ BackTest 2010 - 2016 * Algo does not work before 2010 due to lack of certain dat
 
 
 
+
 Examples of Longs and Shorts
+
+
+
 ![](images/2015List.PNG)
 
 
@@ -49,4 +57,7 @@ Examples of Longs and Shorts
 
 
 TearSheet for 2015 only
+
+
+
 ![](images/TearSheet.png)
